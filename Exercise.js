@@ -52,7 +52,7 @@ async function addNewLanguage() {
         const language = new Languages( coursesToAdd[i] );
          res = await language.save();
     }
-    return res;
+    console.log(res);
 }
 async function findPublishedBackends() {
     const res = await Languages.find(  )
@@ -70,9 +70,21 @@ async function getBackendFrontend() {
         .select( { name: 1, auther: 1 } )
         console.log( languageFound );
 }
+async function updateCourse(id){
+    const language = await Languages.findById( id );
+    language.set( { auther: "Another Auther", price: 9020 } )
+    const res = await language.save();
+    console.log( res );
+}
+async function deleteLanguage(id) {
+    const deletedResult = await Languages.findByIdAndRemove( id );
+    console.log( deletedResult );
+}
 function run() {
-    //console.log( addNewLanguage() );
+   // console.log( addNewLanguage() );
     //console.log( findPublishedBackends() );
-    console.log( getBackendFrontend() );
+   // console.log( getBackendFrontend() );
+   // console.log( updateCourse( '6374fcd82459c0538dfbb82d' ) );
+    console.log( deleteLanguage( '6374ff803f673d9d05eb75b5' ) );
 }
 run();
